@@ -14,21 +14,26 @@ namespace DataAccessLayer.Repository
             _dbSet = _context.Set<T>();
         }
 
-        public async Task<int> AddAsync(T entity)
+        public async Task<int> AddAsync(T entity) 
+
         {
             try
             {
                 await _dbSet.AddAsync(entity);
                 await _context.SaveChangesAsync();
-                return 1;
+                var property = entity.GetType().GetProperty("Id");
+                if (property != null) { 
+                return (int?)property.GetValue(entity) ?? 0;
+                }
+                throw new Exception("Entity doesn't have Id Property.");
             }
-            catch
+            catch(Exception ex) 
             {
-                return 0;
+                throw new Exception(ex.Message);
             }
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             try
             {
@@ -37,11 +42,13 @@ namespace DataAccessLayer.Repository
                 {
                     _dbSet.Remove(entity);
                     await _context.SaveChangesAsync();
+                    return true;
                 }
+                return false;
             }
             catch
             {
-
+                return false;
             }
         }
 
@@ -64,10 +71,11 @@ namespace DataAccessLayer.Repository
             }
         }
 
-        public async Task UpdateAsync(T entity)
+        public async Task<bool> UpdateAsync(T entity)
         {
             _dbSet.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            return true;    
         }
     }
 }

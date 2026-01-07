@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace EntityLayer
 {
     [Table("Users")]
-    public class User
+    public class User : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         public string Email { get; set; }
         [Required]

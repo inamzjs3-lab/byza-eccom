@@ -27,5 +27,11 @@ namespace Byza.Controllers
         {
             return View();
         }
+        [Route("sign up buyer")]
+        [HttpGet]
+        public IActionResult SignupBuyer()
+        {
+            return View();
+        }
     }
 }
