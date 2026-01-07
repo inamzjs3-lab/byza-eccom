@@ -1,0 +1,73 @@
+﻿using DataAccessLayer.byzaDbContext;
+using DataAccessLayer.Contracts;
+using Microsoft.EntityFrameworkCore;
+
+namespace DataAccessLayer.Repository
+{
+    public class DataRepository<T> : IDataRepository<T> where T : class
+    {
+        private readonly ByzadbContext _context;
+        private readonly DbSet<T> _dbSet;
+        public DataRepository(ByzadbContext context)
+        {
+            _context = context;
+            _dbSet = _context.Set<T>();
+        }
+
+        public async Task<int> AddAsync(T entity)
+        {
+            try
+            {
+                await _dbSet.AddAsync(entity);
+                await _context.SaveChangesAsync();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            try
+            {
+                var entity = await GetByIdAsync(id);
+                if (entity != null)
+                {
+                    _dbSet.Remove(entity);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        public async Task<IEnumerable<T>> GetAllAsync(int page, int pageSize, string search, string orderBy)
+        {
+            return await _dbSet.ToListAsync();
+        }
+
+        public async Task<T?> GetByIdAsync(int id)
+        {
+            try
+            {
+                var _entity = await _dbSet.FindAsync(id);
+                if (_entity == null) { return null; }
+                return _entity;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task UpdateAsync(T entity)
+        {
+            _dbSet.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+    }
+}

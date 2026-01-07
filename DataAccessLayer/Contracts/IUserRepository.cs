@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Contracts
 {
-    public interface IUserRepository
+    public interface IUserRepository : IDataRepository<User>
     {
         Task<int> AddUser(User user);
         Task<bool> UpdateUser(User user);
