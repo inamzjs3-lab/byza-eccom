@@ -16,31 +16,32 @@ namespace DataAccessLayer.Repository
         {
         }
 
-        public async Task<int> AddUser(User user)
+        public async Task<int> AddUserAsync(User user)
         {
             await AddAsync(user);
             return user.Id;
         }
 
-        public async Task<bool> DeleteUser(int id)
+        public async Task<bool> DeleteUserAsync(int id)
         {
             var result = await DeleteAsync(id);  
             return result;
         }
 
-        public async Task<List<User>> GetAll(int skip, int top, string search, string orderBy)
+        public async Task<List<User>> GetAllAsync(int skip, int top, string search, string orderBy)
         {
             return (List<User>)await GetAllAsync(skip, top, search, orderBy);
         }
 
-        public async Task<User> GetById(int id)
+        public async Task<User> GetByIdAsync(int id)
         {
             return await GetByIdAsync(id);
         }
 
-        public async Task<bool> UpdateUser(User user)
-        {
+        public async Task<bool> UpdateUserAsync(User user)
+        { 
             return await UpdateAsync(user);
         }
+      
     }
 }
