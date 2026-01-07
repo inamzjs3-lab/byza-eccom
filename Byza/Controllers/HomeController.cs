@@ -12,21 +12,20 @@ namespace Byza.Controllers
         {
             _logger = logger;
         }
-
+        
         public IActionResult Index()
         {
             return View();
         }
-
-        public IActionResult Privacy()
+        [HttpGet("login-buyer")]
+        public IActionResult LoginViewBuyer()
         {
             return View();
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpGet("login-seller")]
+        public IActionResult LoginViewSeller()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

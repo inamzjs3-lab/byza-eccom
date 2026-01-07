@@ -1,13 +1,15 @@
-﻿using EntityLayer;
+﻿
+
+using EntityLayer;
 
 namespace DataAccessLayer.Contracts
 {
     public interface IUserRepository : IDataRepository<User>
     {
-        Task<int> AddUser(User user);
-        Task<bool> UpdateUser(User user);
-        Task<bool> DeleteUser(int id);
-        Task<User> GetById(int id);
-        Task<List<User>> GetAll(int skip, int top, string search, string orderBy);
+        Task<int> AddUserAsync(User user);
+        Task<bool> UpdateUserAsync(User user);
+        Task<bool> DeleteUserAsync(int id);
+        Task<User> GetByIdAsync(int id);
+        Task<List<User>> GetAllAsync(int skip, int top, string search, string orderBy);
     }
 }
