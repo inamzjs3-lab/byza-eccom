@@ -1,4 +1,6 @@
 using DataAccessLayer.byzaDbContext;
+using DataAccessLayer.Contracts;
+using DataAccessLayer.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ByzadbContext> (options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("byzadb")));
+builder.Services.AddScoped<IBuyerRepository, BuyerRepository>();
 
 var app = builder.Build();
 
