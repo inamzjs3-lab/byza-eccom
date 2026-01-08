@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Contracts
 {
-    internal interface IBuyerRepository
+    public interface IBuyerRepository
     {
+        
     }
 }

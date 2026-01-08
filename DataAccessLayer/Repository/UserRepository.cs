@@ -12,8 +12,10 @@ namespace DataAccessLayer.Repository
 {
     public class UserRepository : DataRepository<User>, IUserRepository
     {
+        private readonly ByzadbContext _context;
         public UserRepository(ByzadbContext context) : base(context)
         {
+            _context = context;
         }
 
         public async Task<int> AddUserAsync(User user)
@@ -36,6 +38,12 @@ namespace DataAccessLayer.Repository
         public async Task<User> GetByIdAsync(int id)
         {
             return await GetByIdAsync(id);
+        }
+
+        public async Task<User?> GetUserByEmailOrMobileAndRole(string emailOrPhone, string role)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => (x.Email == emailOrPhone || x.Mobile == emailOrPhone) && x.UserRole == role);
+            return user;
         }
 
         public async Task<bool> UpdateUserAsync(User user)

@@ -1,8 +1,7 @@
-﻿using Byza.Models.RequestModel;
-using Byza.Models.ResponseModel;
-using DataAccessLayer.Contracts;
+﻿using DataAccessLayer.Contracts;
 using EntityLayer;
 using ServiceLayer.Contracts;
+using ServiceLayer.ServiceModels;
 
 namespace ServiceLayer.Services
 {
@@ -13,7 +12,7 @@ namespace ServiceLayer.Services
         {
             this._userRepository = _userRepository;
         }
-        public async Task<int> AddUserAsync(UserRequestModel userRequestModel)
+        public async Task<int> AddUserAsync(UserRequestServiceModel userRequestModel)
         {
             var enity = new User
             {
@@ -38,13 +37,13 @@ namespace ServiceLayer.Services
             return user;
         }
 
-        public async Task<List<UserResponseModel>> GetAllUsers()
+        public async Task<List<UserResponseServiceModel>> GetAllUsers()
         {
-            var userSM = new List<UserResponseModel>();
+            var userSM = new List<UserResponseServiceModel>();
             var entity = await _userRepository.GetAllAsync(0, 0, "", "");
             foreach (var Users in entity)
             {
-                var usersSM = new UserResponseModel()
+                var usersSM = new UserResponseServiceModel()
                 {
                     Email = Users.Email,
                     Mobile = Users.Mobile,
@@ -56,10 +55,10 @@ namespace ServiceLayer.Services
             return userSM;
         }
 
-        public async Task<UserRequestModel> GetByIdAsync(int id)
+        public async Task<UserRequestServiceModel> GetByIdAsync(int id)
         {
             var user = await _userRepository.GetByIdAsync(id);
-            var entity = new UserRequestModel
+            var entity = new UserRequestServiceModel
             {
                 Email = user.Email,
                 Mobile = user.Mobile,
@@ -69,7 +68,23 @@ namespace ServiceLayer.Services
             return entity;
         }
 
-        public async Task<bool> UpdateUserByIdAsync(UserRequestModel userRequestModel, int id)
+        public async Task<UserResponseServiceModel?> GetUserByEmailOrMobileAndRole(string emailOrPhone, string role)
+        {
+            var user = await _userRepository.GetUserByEmailOrMobileAndRole(emailOrPhone, role);
+            if(user is { })
+            {
+                return null;
+            }
+            return new UserResponseServiceModel()
+            {
+                 UserRole = user?.UserRole ?? string.Empty,
+                 Email = user?.Email ?? string.Empty,
+                 Mobile = user?.Mobile ?? string.Empty,
+                 Password = user?.PasswordHash ?? string.Empty
+            };
+        }
+
+        public async Task<bool> UpdateUserByIdAsync(UserRequestServiceModel userRequestModel, int id)
         {
             var entity = new User
             {

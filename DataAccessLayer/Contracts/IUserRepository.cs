@@ -11,5 +11,6 @@ namespace DataAccessLayer.Contracts
         Task<bool> DeleteUserAsync(int id);
         Task<User> GetByIdAsync(int id);
         Task<List<User>> GetAllAsync(int skip, int top, string search, string orderBy);
+        Task<User?> GetUserByEmailOrMobileAndRole(string emailOrPhone, string role);
     }
 }

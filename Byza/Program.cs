@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<ByzadbContext > (options =>
+builder.Services.AddDbContext<ByzadbContext> (options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("byzadb")));
 
 var app = builder.Build();

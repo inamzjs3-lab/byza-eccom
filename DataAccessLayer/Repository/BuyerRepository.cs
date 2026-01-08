@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repository
 {
-    internal class BuyerRepository
+    public class BuyerRepository
     {
+        
     }
 }
