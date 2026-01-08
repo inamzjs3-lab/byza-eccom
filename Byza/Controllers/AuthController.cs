@@ -8,13 +8,31 @@ namespace Byza.Controllers
     public class AuthController : Controller
     {
         private readonly IBuyerService _buyerService;
+        private readonly IUserService _userService;
 
-        public AuthController(IBuyerService buyerService)
+        public AuthController(IBuyerService buyerService, IUserService userService)
         {
             _buyerService = buyerService;
+            _userService = userService;
         }
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginRequestModel model)
+        {
+            var user = await _userService.GetUserByEmailOrMobileAndRole(model.EmailOrMobile, model.UserRole);
+            if (user is { })
+            {
+                return BadRequest("User not found");
+            }
+            if (user?.Password == model.Password)
+            {
+                return RedirectToAction($"{user.UserRole}/Dashboard");
+            }
+            ModelState.AddModelError("loginError", "Login failed!");
+            return RedirectToAction($"login-{user?.UserRole}");
+        }
+    
 
-        [HttpPost("register-buyer")]
+[HttpPost("register-buyer")]
         public async Task<IActionResult> SignupBuyer(SignupRequestModel model)
         {
             if (ModelState.IsValid)
