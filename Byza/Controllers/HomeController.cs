@@ -39,5 +39,12 @@ namespace Byza.Controllers
         {
             return View();
         }
+        [HttpGet("AddProduct")]
+        public IActionResult AddProducts()
+        {
+            return View();
+           
+        }
+       
     }
 }

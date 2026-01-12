@@ -30,10 +30,10 @@ namespace Byza.Controllers
             ModelState.AddModelError("loginError", "Login failed!");
             return RedirectToAction($"login-{user?.UserRole}");
         }
-    
 
-[HttpPost("register-buyer")]
-        public async Task<IActionResult> SignupBuyer(SignupRequestModel model)
+
+        [HttpPost("signedup")]
+        public async Task<IActionResult> SignUpBuyer(SignupRequestModel model)
         {
             if (ModelState.IsValid)
             {
@@ -48,11 +48,14 @@ namespace Byza.Controllers
                 var isAdded = await _buyerService.SignupBuyer(buyerModel);
                 if (isAdded)
                 {
-                    return RedirectToAction($"login-buyer");
+                    return RedirectToAction("login-buyer");
                 }
             }
 
             return RedirectToAction("signup-buyer");
         }
+
+
+   
     }
 }
