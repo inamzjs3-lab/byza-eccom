@@ -1,5 +1,3 @@
-using System.Diagnostics;
-using Byza.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Byza.Controllers
@@ -12,7 +10,7 @@ namespace Byza.Controllers
         {
             _logger = logger;
         }
-        
+
         public IActionResult Index()
         {
             return View();
@@ -43,8 +41,18 @@ namespace Byza.Controllers
         public IActionResult AddProducts()
         {
             return View();
-           
+
         }
-       
+        //[HttpGet("updateProduct")]
+        //public IActionResult UpdateProducts()
+        //{
+        //    return View();
+        //}
+        [HttpGet("getbyid")]
+        public IActionResult GetById()
+        {
+            return View();
+        }
+
     }
 }

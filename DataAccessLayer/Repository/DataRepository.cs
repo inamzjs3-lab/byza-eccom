@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.byzaDbContext;
 using DataAccessLayer.Contracts;
+using EntityLayer;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Repository
@@ -14,7 +15,7 @@ namespace DataAccessLayer.Repository
             _dbSet = _context.Set<T>();
         }
 
-        public async Task<int> AddAsync(T entity) 
+        public async Task<int> AddAsync(T entity)
 
         {
             try
@@ -62,20 +63,26 @@ namespace DataAccessLayer.Repository
             try
             {
                 var _entity = await _dbSet.FindAsync(id);
-                if (_entity == null) { return null; }
                 return _entity;
             }
-            catch
+            catch(Exception ex)
             {
-                return null;
+                throw new Exception($"Something went wrong. {ex.Message}");
             }
         }
 
         public async Task<bool> UpdateAsync(T entity)
         {
-            _dbSet.Entry(entity).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return true;    
+            try
+            {
+                _dbSet.Entry(entity).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch(Exception ex) 
+            {
+                return false;
+            }   
         }
     }
 }

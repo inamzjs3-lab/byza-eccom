@@ -26,10 +26,24 @@ namespace ServiceLayer.Services
             return result;
         }
 
+        public async Task<ProductRequestModel> GetById(int id)
+        {
+            var Product = await _repository.GetByIdAsync(id);
+            var entity = new ProductRequestModel
+            {
+                Description = Product.ProductDescription,
+                Price = Product.Price,
+                ProductName = Product.ProductName,
+                StockQuantity = Product.StockQuantity,
+
+            };
+            return entity;
+        }
+
         public async Task<List<ProductRequestModel>> GetProductsAsync()
         {
             var productsRm = new List<ProductRequestModel>();
-            var products = await _repository.GetAllAsync(0,100,string.Empty,string.Empty);
+            var products = await _repository.GetAllAsync(0, 100, string.Empty, string.Empty);
             foreach (var item in products)
             {
                 var productM = new ProductRequestModel()
@@ -43,6 +57,20 @@ namespace ServiceLayer.Services
                 productsRm.Add(productM);
             }
             return productsRm;
+        }
+
+        public async Task<bool> UpdateProductAsync(int id, ProductRequestModel model)
+        {
+            var result = new Products
+            {
+                Id = id,
+                ProductDescription = model.Description,
+                Price = model.Price,
+                ProductName = model.ProductName,
+                StockQuantity = model.StockQuantity,
+            };
+            var update = await _repository.UpdateAsync(result);
+            return update;
         }
     }
 }

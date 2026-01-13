@@ -1,33 +1,46 @@
 ﻿@using ServiceLayer.ServiceModels
-@model List<ProductRequestModel>
+@model List<ProductResponceModel>
 
 <h2>All Products</h2>
 
 <table class="table table-bordered">
     <thead>
         <tr>
+            <th>Product Id</th>
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
             <th>Stock</th>
+            <th>Action</th>   
         </tr>
     </thead>
+
     <tbody>
         @foreach (var product in Model)
         {
             <tr>
+                <td>@product.Id</td>
                 <td>@product.ProductName</td>
                 <td>@product.Description</td>
                 <td>@product.Price</td>
                 <td>@product.StockQuantity</td>
+                <td>
+                    <a href="javascript:void(0);" onclick="location.href='@Url.Action("UpdateProducts","product", new{id=product.Id})," title="Edit">
+                    </a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+<script>
+    function confirmUpdate(id) {
+            location.href = '/Products/Edit/' + id;
+    }
+</script>
+
 <button type="button"
         class="btn btn-primary"
-        onclick="location.href='@Url.Action("AddProducts","Home")'">
-        Add New Product
+        onclick="location.href='@Url.Action("AddProducts", "Home")'">
+    Add New Product
 </button>
-
-

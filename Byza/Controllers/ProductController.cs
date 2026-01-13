@@ -29,5 +29,20 @@ namespace Byza.Controllers
             return View(products);
           
         }
+        [HttpPut("UpdateProducts")]
+        public async Task<IActionResult> UpdateProducts(int id, ProductRequestModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = await productService.UpdateProductAsync(id, model);
+            if (result)
+            {
+                return RedirectToAction("GetAllProducts");
+            }
+            return View(model);
+
+        }
     }
 }
