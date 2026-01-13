@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ServiceLayer.ServiceModels
 {
@@ -14,8 +9,13 @@ namespace ServiceLayer.ServiceModels
         public string ProductName { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         [Required]
-        public string Price { get; set; } = string.Empty;
+        public decimal Price { get; set; }
         [Required]
         public int StockQuantity { get; set; }
+        [Required]
+        public string ProductImage { get; set; }
+        [Required]
+        public bool IsApproved { get; set; }
+
     }
 }

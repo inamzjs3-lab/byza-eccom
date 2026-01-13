@@ -21,42 +21,68 @@ namespace ServiceLayer.Services
                 Price = model.Price,
                 ProductName = model.ProductName,
                 StockQuantity = model.StockQuantity,
+                IsApproved = model.IsApproved,
+                ProductImage = Convert.FromBase64String(model.ProductImage),
             };
             var result = await _repository.AddAsync(_entity);
             return result;
         }
 
-        public async Task<ProductRequestModel> GetById(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var Product = await _repository.GetByIdAsync(id);
-            var entity = new ProductRequestModel
-            {
-                Description = Product.ProductDescription,
-                Price = Product.Price,
-                ProductName = Product.ProductName,
-                StockQuantity = Product.StockQuantity,
-
-            };
+            var entity = await _repository.DeleteAsync(id);
             return entity;
         }
 
-        public async Task<List<ProductRequestModel>> GetProductsAsync()
+        public async Task<ProductResponceModel> GetById(int id)
         {
-            var productsRm = new List<ProductRequestModel>();
-            var products = await _repository.GetAllAsync(0, 100, string.Empty, string.Empty);
-            foreach (var item in products)
+            var entity = await _repository.GetByIdAsync(id);
+
+            if (entity != null)
             {
-                var productM = new ProductRequestModel()
+
+                var Product = new ProductResponceModel
                 {
-                    Description = item.ProductDescription,
-                    Price = item.Price,
-                    ProductName = item.ProductName,
-                    StockQuantity = item.StockQuantity,
+                    Id = entity.Id,
+                    Description = entity.ProductDescription,
+                    Price = entity.Price,
+                    ProductName = entity.ProductName,
+                    StockQuantity = entity.StockQuantity,
+                    IsApproved = entity.IsApproved,
+                    ProductImage = Convert.ToBase64String(entity.ProductImage),
 
                 };
-                productsRm.Add(productM);
+                return Product;
             }
-            return productsRm;
+            return new ProductResponceModel();
+            
+           
+        }
+
+        public async Task<List<ProductResponceModel>> GetProductsAsync()
+        {
+            var productsRm = new List<ProductResponceModel>();
+            var products = await _repository.GetAllAsync(0, 100, string.Empty, string.Empty);
+            if (products != null)
+            {
+                foreach (var item in products)
+                {
+                    var productM = new ProductResponceModel()
+                    {
+                        Description = item.ProductDescription,
+                        Price = item.Price,
+                        ProductName = item.ProductName,
+                        StockQuantity = item.StockQuantity,
+                        IsApproved = item.IsApproved,
+                        ProductImage = Convert.ToBase64String(item.ProductImage),
+
+
+                    };
+                    productsRm.Add(productM);
+                }
+                return productsRm;
+            }
+            return new List<ProductResponceModel>();
         }
 
         public async Task<bool> UpdateProductAsync(int id, ProductRequestModel model)
@@ -68,9 +94,14 @@ namespace ServiceLayer.Services
                 Price = model.Price,
                 ProductName = model.ProductName,
                 StockQuantity = model.StockQuantity,
+                IsApproved = model.IsApproved,
+                 ProductImage= Convert.FromBase64String(model.ProductImage),
+
+
             };
             var update = await _repository.UpdateAsync(result);
             return update;
         }
+
     }
 }

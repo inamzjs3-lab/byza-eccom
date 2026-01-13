@@ -1,12 +1,20 @@
-﻿<form>
+﻿@* @model Byza.Models.RequestModel.LoginRequestModel *@
+
+<form asp-controller="Auth" asp-action="Login" method="post">
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <label for="exampleInputEmail1" name="EmailOrMobile" class="form-label">EmailOrMobile</label>
+        <input type="text" name="EmailOrMobile" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
     </div>
+   
+
     <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <label for="exampleInputPassword1" name="Password" class="form-label">Password</label>
+        <input type="password" name="Password" class=" form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputRole" name="UserRole" class="form-label">Role</label>
+        <input type="text" name="UserRole" class="form-control" id="exampleInputRole">
     </div>
     <div class="mb-3 form-check">
         <input type="text" class="form-check-input" id="role" value="Buyer" style="display:none">

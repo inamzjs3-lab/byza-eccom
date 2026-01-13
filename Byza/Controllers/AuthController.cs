@@ -26,6 +26,7 @@ namespace Byza.Controllers
             if (user?.Password == model.Password)
             {
                 return RedirectToAction($"{user.UserRole}/Dashboard");
+
             }
             ModelState.AddModelError("loginError", "Login failed!");
             return RedirectToAction($"login-{user?.UserRole}");
