@@ -5,25 +5,36 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Repository
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : DataRepository<Products>, IProductRepository
     {
-        private readonly ByzadbContext _context;
-        public ProductRepository(ByzadbContext context)
+        public ProductRepository(ByzadbContext context) : base(context)
         {
-            _context = context;
         }
 
-        public async Task<int> AddProductAsync(Products entity)
+        public async Task<int> AddAsync(Products entity)
         {
-            await _context.Products.AddAsync(entity);
-            await _context.SaveChangesAsync();
+            await AddAsync(entity);
             return entity.Id;
         }
 
-        public async Task<List<Products>> GetAllProductsAsync()
+        public Task<bool> DeleteAsync(int id)
         {
-            var record = await _context.Products.ToListAsync();
-            return record;
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Products>> GetAllAsync(int page, int pageSize, string search, string orderBy)
+        {
+            return GetAllAsync(page, pageSize, search, "asc");
+        }
+
+        public Task<Products?> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateAsync(Products entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
