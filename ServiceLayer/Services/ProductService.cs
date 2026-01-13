@@ -22,14 +22,14 @@ namespace ServiceLayer.Services
                 ProductName = model.ProductName,
                 StockQuantity = model.StockQuantity,
             };
-            var result = await _repository.AddProductAsync(_entity);
+            var result = await _repository.AddAsync(_entity);
             return result;
         }
 
         public async Task<List<ProductRequestModel>> GetProductsAsync()
         {
             var productsRm = new List<ProductRequestModel>();
-            var products = await _repository.GetAllProductsAsync();
+            var products = await _repository.GetAllAsync(0,100,string.Empty,string.Empty);
             foreach (var item in products)
             {
                 var productM = new ProductRequestModel()
@@ -43,7 +43,6 @@ namespace ServiceLayer.Services
                 productsRm.Add(productM);
             }
             return productsRm;
-
         }
     }
 }

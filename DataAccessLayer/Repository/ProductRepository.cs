@@ -17,9 +17,10 @@ namespace DataAccessLayer.Repository
             return entity.Id;
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            await DeleteAsync(id);
+            return true;
         }
 
         public Task<IEnumerable<Products>> GetAllAsync(int page, int pageSize, string search, string orderBy)
@@ -27,14 +28,15 @@ namespace DataAccessLayer.Repository
             return GetAllAsync(page, pageSize, search, "asc");
         }
 
-        public Task<Products?> GetByIdAsync(int id)
+        public async Task<Products?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await GetByIdAsync(id);
         }
 
-        public Task<bool> UpdateAsync(Products entity)
+        public async Task<bool> UpdateAsync(Products entity)
         {
-            throw new NotImplementedException();
+             await UpdateAsync(entity);
+            return true;
         }
     }
 }
