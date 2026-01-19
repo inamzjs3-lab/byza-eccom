@@ -35,8 +35,7 @@ namespace DataAccessLayer.Repository
 
         public async Task<bool> UpdateProductAsync(Products entity)
         {
-             await UpdateAsync(entity);
-            return true;
+            return await UpdateAsync(entity);
         }
     }
 }

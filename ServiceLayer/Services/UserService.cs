@@ -71,7 +71,7 @@ namespace ServiceLayer.Services
         public async Task<UserResponseServiceModel?> GetUserByEmailOrMobileAndRole(string emailOrPhone, string role)
         {
             var user = await _userRepository.GetUserByEmailOrMobileAndRole(emailOrPhone, role);
-            if(user is { })
+            if(user is null)
             {
                 return null;
             }

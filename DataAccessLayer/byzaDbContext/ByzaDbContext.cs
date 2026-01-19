@@ -11,6 +11,7 @@ namespace DataAccessLayer.byzaDbContext
         public DbSet<User> Users { get; set; }
         public DbSet<Buyer> Buyers { get; set; }
         public DbSet<Products> Products { get; set; }
+        public DbSet<Seller> Sellers { get; set; }
     }
 
 }

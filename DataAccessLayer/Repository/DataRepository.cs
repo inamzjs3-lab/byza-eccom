@@ -9,6 +9,7 @@ namespace DataAccessLayer.Repository
     {
         private readonly ByzadbContext _context;
         private readonly DbSet<T> _dbSet;
+
         public DataRepository(ByzadbContext context)
         {
             _context = context;

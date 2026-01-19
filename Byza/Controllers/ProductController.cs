@@ -13,7 +13,7 @@ namespace Byza.Controllers
         {
             this.productService = productService;
         }
-        [HttpPost("addProducts")]
+        [HttpPost("AddProduct")]
         public async Task<IActionResult> AddProduct(ProductRequestModel model)
         {
             if (!ModelState.IsValid)

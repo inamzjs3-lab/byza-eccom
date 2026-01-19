@@ -1,0 +1,43 @@
+﻿@using ServiceLayer.ServiceModels
+@model IEnumerable<ProductResponceModel>
+
+<h2>Seller Dashboard</h2>
+
+<p>
+    <a asp-controller="Product" asp-action="AddProduct" asp-co method="post" class="btn btn-primary">+ Add New Product</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>ProductImage</th>
+            <th>StockQuantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model.Any()){
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.StockQuantity)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProductImage)</td>
+                <td>
+                    <a asp-action="UpdateProducts" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="DeleteProduct" asp-route-id="@item.Id">Delete</a>
+                  
+
+                </td>
+            </tr>
+            }
+        }else{
+       <tr><td>No Products found!</td></tr>
+        }
+    </tbody>
+</table>
+
