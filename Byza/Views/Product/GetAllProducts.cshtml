@@ -24,10 +24,9 @@
                 <td>@product.Description</td>
                 <td>@product.Price</td>
                 <td>@product.StockQuantity</td>
-                <td>@product.ProductImage</td>
+                <td><img src="data:image/[image-type];base64, @product.ProductImage" height="80" width="80" /></td>
                 <td>
-                    <a href="javascript:void(0);" onclick="location.href='@Url.Action("UpdateProducts","product", new{id=product.Id})," title="Edit">
-                    </a>
+                    <button type="button" onclick="confirmUpdate(@product.Id)"></button>
                 </td>
             </tr>
         }
@@ -36,7 +35,7 @@
 
 <script>
     function confirmUpdate(id) {
-            location.href = '/Products/Edit/' + id;
+            location.href = '/editproduct/' + id;
     }
 </script>
 

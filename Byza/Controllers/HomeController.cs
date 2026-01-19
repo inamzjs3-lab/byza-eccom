@@ -43,11 +43,6 @@ namespace Byza.Controllers
         {
             return View();
         }
-        [HttpGet("GetById")]
-        public IActionResult GetById()
-        {
-            return View();
-        }
         [HttpDelete("deleteproducts")]
         public IActionResult DeleteById()
         {

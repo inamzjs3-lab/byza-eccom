@@ -38,8 +38,8 @@ namespace Byza.Controllers
             return View(products);
 
         }
-        [HttpGet("getbyid{id}")]
-        public async Task<IActionResult> GetById(int id)
+        [HttpGet("editproduct/{id}")]
+        public async Task<IActionResult> EditProduct([FromRoute]int id)
         {
             var product = await productService.GetById(id);
 
@@ -55,7 +55,7 @@ namespace Byza.Controllers
             {
                 return View(model);
             }
-            var result = await productService.UpdateProductAsync(id, model);
+            var result = await productService.UpdateProductAsync(id,model);
             if (result)
             {
                 return RedirectToAction("GetAllProducts");

@@ -69,6 +69,7 @@ namespace ServiceLayer.Services
                 {
                     var productM = new ProductResponceModel()
                     {
+                        Id = item.Id,
                         Description = item.ProductDescription,
                         Price = item.Price,
                         ProductName = item.ProductName,

@@ -2,10 +2,8 @@
 @model ProductResponceModel
 
 <h2>Update Product</h2>
-
 <form asp-action="UpdateProducts" asp-controller="Product" method="post">
-
-    <input type="hidden" asp-for="Id" name="Id"/>
+    <input type="hidden" name="Id" value="ProductId" />
 
     <div class="form-group">
         <label>Name</label>
@@ -21,7 +19,10 @@
         <label>Price</label>
         <input asp-for="Price" class="form-control" />
     </div>
-
+    <div class="form-group">
+        <label>StockQuantity</label>
+        <input asp-for="StockQuantity" class="form-control" />
+    </div>
 
     <div class="form-group">
         <label>Image</label>
@@ -29,11 +30,10 @@
     </div>
 
     <br />
-    <a asp-action="GetById" asp-route-id="@Model.Id" class="btn btn-sm btn-warning">
-        Edit
-    </a>
 
     <button type="submit" class="btn btn-primary">Update Product</button>
+    <a href="@Url.Action("UpdateProducts", "Product", new { id = Model.Id })" title="Edit">
+    </a>
 
 </form>
 
