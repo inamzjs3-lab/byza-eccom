@@ -1,0 +1,27 @@
+﻿@using ServiceLayer.ServiceModels
+@model ProductResponceModel
+
+<h2>Delete Product</h2>
+<a asp-action="DeleteProducts"
+   asp-controller="Product"
+   asp-route-id="@Model.Id"
+   class="btn btn-danger btn-sm">
+</a>
+
+<h4>Are you sure you want to delete this product?</h4>
+
+<hr />
+
+<div>
+    <p><b>Name:</b> @Model.ProductName</p>
+    <p><b>Price:</b> @Model.Price</p>
+    <p><b>Description:</b> @Model.Description</p>
+    <p><b>StockQuantity:</b> @Model.StockQuantity</p>
+</div>
+
+<form asp-action="DeleteConfirmed" asp-controller="Product" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

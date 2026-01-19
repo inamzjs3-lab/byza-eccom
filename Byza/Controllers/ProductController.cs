@@ -62,7 +62,7 @@ namespace Byza.Controllers
             }
             return View(model);
         }
-        [HttpDelete("DeleteProduct")]
+        [HttpPost("DeleteProduct/{id}")]
         public async Task<IActionResult> DeleteProducts(int id)
         {
             await productService.DeleteAsync(id);
