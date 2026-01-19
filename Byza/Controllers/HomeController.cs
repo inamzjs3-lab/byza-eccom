@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Byza.Controllers
 {
@@ -41,17 +42,16 @@ namespace Byza.Controllers
         public IActionResult AddProducts()
         {
             return View();
-
         }
-        //[HttpGet("updateProduct")]
-        //public IActionResult UpdateProducts()
-        //{
-        //    return View();
-        //}
-        [HttpGet("getbyid")]
+        [HttpGet("GetById")]
         public IActionResult GetById()
         {
             return View();
+        }
+        [HttpDelete("deleteproducts")]
+        public IActionResult DeleteById()
+        {
+            return View();  
         }
 
     }

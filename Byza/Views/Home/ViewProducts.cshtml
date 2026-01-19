@@ -1,0 +1,39 @@
+﻿@using ServiceLayer.ServiceModels
+@model ProductResponceModel
+
+<h2>Update Product</h2>
+
+<form asp-action="UpdateProducts" asp-controller="Product" method="post">
+
+    <input type="hidden" asp-for="Id" name="Id"/>
+
+    <div class="form-group">
+        <label>Name</label>
+        <input asp-for="ProductName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Description</label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Price</label>
+        <input asp-for="Price" class="form-control" />
+    </div>
+
+
+    <div class="form-group">
+        <label>Image</label>
+        <input asp-for="ProductImage" class="form-control" />
+    </div>
+
+    <br />
+    <a asp-action="GetById" asp-route-id="@Model.Id" class="btn btn-sm btn-warning">
+        Edit
+    </a>
+
+    <button type="submit" class="btn btn-primary">Update Product</button>
+
+</form>
+

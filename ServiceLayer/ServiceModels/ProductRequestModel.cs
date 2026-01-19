@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ServiceLayer.ServiceModels
 {
@@ -17,7 +12,7 @@ namespace ServiceLayer.ServiceModels
         [Required]
         public int StockQuantity { get; set; }
         [Required]
-        public string ProductImage { get; set; }
+        public string ProductImage { get; set; }= string.Empty;
         [Required]
         public bool IsApproved { get; set; }
 

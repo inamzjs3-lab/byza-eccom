@@ -4,6 +4,7 @@ namespace ServiceLayer.ServiceModels
 {
     public class ProductResponceModel
     {
+        [Key]
         public int Id { get; set; }
         [Required]
         public string ProductName { get; set; } = string.Empty;

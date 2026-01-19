@@ -1,0 +1,7 @@
+﻿@using ServiceLayer.ServiceModels
+@model ProductResponceModel
+<form asp-action="DeleteProduct" asp-controller="Product" method="post" style="display:inline">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+</form>
+

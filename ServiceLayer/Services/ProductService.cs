@@ -22,7 +22,7 @@ namespace ServiceLayer.Services
                 ProductName = model.ProductName,
                 StockQuantity = model.StockQuantity,
                 IsApproved = model.IsApproved,
-                ProductImage = Convert.FromBase64String(model.ProductImage),
+                ProductImage = Convert.FromBase64String(model.ProductImage)
             };
             var result = await _repository.AddAsync(_entity);
             return result;
@@ -49,7 +49,7 @@ namespace ServiceLayer.Services
                     ProductName = entity.ProductName,
                     StockQuantity = entity.StockQuantity,
                     IsApproved = entity.IsApproved,
-                    ProductImage = Convert.ToBase64String(entity.ProductImage),
+                    ProductImage = Convert.ToBase64String(entity.ProductImage)
 
                 };
                 return Product;

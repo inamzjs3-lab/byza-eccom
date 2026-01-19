@@ -2,6 +2,7 @@
 using ServiceLayer.Contracts;
 using ServiceLayer.ServiceModels;
 using ServiceLayer.Services;
+using System.Net.Http;
 
 namespace Byza.Controllers
 {
@@ -12,12 +13,20 @@ namespace Byza.Controllers
         {
             this.productService = productService;
         }
-        [HttpPost]
+        [HttpPost("addProducts")]
         public async Task<IActionResult> AddProduct(ProductRequestModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model); //why model coz whatever user has given the data is ll not b lost it ll b  displayed only the wrong info ll be blank
+            }
+            if (!string.IsNullOrEmpty(model.ProductImage))
+            {
+                // remove: data:image/png;base64,
+                if (model.ProductImage.Contains(","))
+                {
+                    model.ProductImage = model.ProductImage.Split(',')[1];
+                }
             }
             await productService.AddProductAsync(model);
             return RedirectToAction("GetAllProducts");
@@ -27,7 +36,17 @@ namespace Byza.Controllers
         {
             var products = await productService.GetProductsAsync();
             return View(products);
-          
+
+        }
+        [HttpGet("getbyid{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var product = await productService.GetById(id);
+
+            if (product == null)
+                return NotFound();
+
+            return View(product);
         }
         [HttpPut("UpdateProducts")]
         public async Task<IActionResult> UpdateProducts(int id, ProductRequestModel model)
@@ -42,7 +61,12 @@ namespace Byza.Controllers
                 return RedirectToAction("GetAllProducts");
             }
             return View(model);
-
+        }
+        [HttpDelete("DeleteProduct")]
+        public async Task<IActionResult> DeleteProducts(int id)
+        {
+            await productService.DeleteAsync(id);
+            return RedirectToAction("GetAllProducts");
         }
     }
 }

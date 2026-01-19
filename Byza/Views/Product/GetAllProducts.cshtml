@@ -11,7 +11,7 @@
             <th>Description</th>
             <th>Price</th>
             <th>Stock</th>
-            <th>Action</th>   
+            <th>Image</th>
         </tr>
     </thead>
 
@@ -24,6 +24,7 @@
                 <td>@product.Description</td>
                 <td>@product.Price</td>
                 <td>@product.StockQuantity</td>
+                <td>@product.ProductImage</td>
                 <td>
                     <a href="javascript:void(0);" onclick="location.href='@Url.Action("UpdateProducts","product", new{id=product.Id})," title="Edit">
                     </a>
