@@ -1,1 +1,61 @@
-﻿
+﻿@using ServiceLayer.ServiceModels
+
+@model IEnumerable<ProductResponceModel>
+
+@{
+    ViewData["Title"] = "Buyer Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                @* <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name"> *@
+                <img src="data:image/png;base64,@product.ProductImage"
+                     class="card-img-top"
+                     style="height:180px; object-fit:cover;" />
+                <div class="card-body">
+                    <h5 class="card-title">@product.ProductName</h5>
+                    <p class="card-text">@product.Description</p>
+                    <p class="card-text"><strong>$@product.Price</strong></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                            <input type="hidden" name="productId" value="@product.Id" />
+                           
+                            <div class="quantity-box">
+                                <button class="btn-minus">-</button>
+
+                                <input type="text" class="qty" value="1" readonly>
+
+                                <button class="btn-plus">+</button>
+                            </div>
+                            @* <input type="number" name="quantity" value="1" min="1" class="form-control mb-2" style="width: 80px;" /> *@
+                            <button type="button" class="btn btn-primary">Add to Cart</button>
+                        @* A "Buy Now" button would work similarly to Add to Cart, but redirect immediately to checkout/payment *@
+                        <a href="@Url.Action("BuyNow", "Checkout", new { productId = product.Id })" class="btn btn-success">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<script src="~/js/cart.js"></script>
+<script>
+        $(document).ready(function() {
+    });
+        $(".btn-plus").on('click',function () {
+            let input = $(this).siblings(".qty");
+            let value = parseInt(input.val());
+            input.val(value + 1);
+        });
+
+        $(".btn-minus").on('click',function () {
+            let input = $(this).siblings(".qty");
+            let value = parseInt(input.val());
+            if (value > 1) {
+                input.val(value - 1);
+            }
+        });
+</script>
+

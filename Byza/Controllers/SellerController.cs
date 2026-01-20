@@ -16,12 +16,12 @@ namespace Byza.Controllers
         {
             return View();
         }
-        [HttpGet]
-        public async Task<IActionResult> SellerDashboard()
-        {
-            var products = await _productService.GetProductsAsync();
-            return View(products);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> SellerDashboard()
+        //{
+        //    var products = await _productService.GetProductsAsync();
+        //    return View(products);
+        //}
 
     }
 }

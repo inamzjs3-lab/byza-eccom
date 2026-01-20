@@ -52,12 +52,20 @@
 </div>
 
 <script>
-    document.getElementById("imageInput").addEventListener("change", function () {
-        var file = this.files[0];
-        var reader = new FileReader();
-        reader.onload = function () {
-            document.getElementById("base64Image").value = reader.result;
-        };
-        reader.readAsDataURL(file);
+    $('#imageInput').on('change',function(){
+    var file = this.files[0];
+           var reader = new FileReader();
+           reader.onload = function () {
+               $("#base64Image").val(reader.result);
+           };
+           reader.readAsDataURL(file);
     });
+    // document.getElementById("imageInput").addEventListener("change", function () {
+    //     var file = this.files[0];
+    //     var reader = new FileReader();
+    //     reader.onload = function () {
+    //         document.getElementById("base64Image").value = reader.result;
+    //     };
+    //     reader.readAsDataURL(file);
+    // });
 </script>

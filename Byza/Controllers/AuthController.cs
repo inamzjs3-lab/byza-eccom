@@ -21,13 +21,13 @@ namespace Byza.Controllers
         public async Task<IActionResult> Login(LoginRequestModel model)
         {
             var user = await _userService.GetUserByEmailOrMobileAndRole(model.EmailOrMobile, model.UserRole);
-            if (user is { })
+            if (user is null)
             {
                 return BadRequest("User not found");
             }
             if (user?.Password == model.Password)
             {
-                return RedirectToAction($"{user.UserRole}/Dashboard");
+                return Redirect("/Buyer/BuyerDashboard");
 
             }
             ModelState.AddModelError("loginError", "Login failed!");
