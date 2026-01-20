@@ -44,7 +44,7 @@ namespace Byza.Controllers
             }
             if (user?.Password == model.Password)
             {
-                return Redirect("/Seller/SellerDashboard");
+                return Redirect("SellerDashboard");
             }
             ModelState.AddModelError("loginError", "Login failed!");
             return RedirectToAction($"login-{user?.UserRole}");
@@ -89,10 +89,10 @@ namespace Byza.Controllers
                     Mobile = model.Mobile
 
                 };
-                var add = await _sellerService.SignupSeller(seller);
-                if(add)
+                var isRegistered = await _sellerService.SignupSeller(seller);
+                if(isRegistered)
                 {
-                    return RedirectToAction("login-seller");
+                    return Redirect("/login-seller");
                 }
                 
             }
