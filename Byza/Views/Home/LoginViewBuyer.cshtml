@@ -1,23 +1,43 @@
-﻿@* @model Byza.Models.RequestModel.LoginRequestModel *@
+﻿<form asp-controller="Auth" asp-action="Login" method="post">
 
-<form asp-controller="Auth" asp-action="Login" method="post">
-    <div class="mb-3">
-        <label for="exampleInputEmail1" name="EmailOrMobile" class="form-label">EmailOrMobile</label>
-        <input type="text" name="EmailOrMobile" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-   
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <div class="mb-3">
-        <label for="exampleInputPassword1" name="Password" class="form-label">Password</label>
-        <input type="password" name="Password" class=" form-control" id="exampleInputPassword1">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+
+                <div class="card shadow p-4" style="border-radius:10px; background:#fff;">
+
+                    <h3 class="text-center mb-4">Login</h3>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email or Mobile</label>
+                        <input type="text" name="EmailOrMobile" class="form-control" placeholder="Enter email or mobile">
+                        <div class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="Password" class="form-control" placeholder="Enter password">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Role</label>
+                        <input type="text" name="UserRole" class="form-control" placeholder="Buyer or Seller">
+                    </div>
+
+                    <!-- Hidden Buyer Role (optional) -->
+                    <input type="hidden" name="UserRole" value="Buyer" />
+
+                    <button type="submit" class="btn btn-primary w-100 mt-3">
+                        Login
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="exampleInputRole" name="UserRole" class="form-label">Role</label>
-        <input type="text" name="UserRole" class="form-control" id="exampleInputRole">
-    </div>
-    <div class="mb-3 form-check">
-        <input type="text" class="form-check-input" id="role" value="Buyer" style="display:none">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+
 </form>

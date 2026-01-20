@@ -2,9 +2,40 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome Sir / Mam</h1>
-    <p><a asp-controller="Home" asp-action="LoginViewBuyer">Login as buyer</a><br /> <a asp-controller="Home" asp-action="LoginViewSeller">Login as seller</a><br />
-        <a asp-controller="Home" asp-action="SignupBuyer">Signup as buyer</a><br /><a asp-controller="Home" asp-action="SignupSeller">Signup as seller</a>
-    </p>
+<!-- Bootstrap CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container mt-5">
+
+    <div class="text-center">
+        <h1 class="display-4 mb-4">Welcome</h1>
+
+        <!-- Links wrapper -->
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+
+                <div class="card shadow p-4" style="border-radius:10px; background:#fff;">
+
+                    <a asp-controller="Home" asp-action="LoginViewBuyer" class="btn btn-primary w-100 mb-3">
+                        Login as Buyer
+                    </a>
+
+                    <a asp-controller="Home" asp-action="LoginViewSeller" class="btn btn-primary w-100 mb-3">
+                        Login as Seller
+                    </a>
+
+                    <a asp-controller="Home" asp-action="SignupBuyer" class="btn btn-success w-100 mb-3">
+                        Signup as Buyer
+                    </a>
+
+                    <a asp-controller="Home" asp-action="SignupSeller" class="btn btn-success w-100">
+                        Signup as Seller
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </div>

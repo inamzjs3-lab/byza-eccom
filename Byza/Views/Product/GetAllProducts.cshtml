@@ -1,46 +1,65 @@
 ﻿@using ServiceLayer.ServiceModels
 @model List<ProductResponceModel>
 
-<h2>All Products</h2>
+<!-- Bootstrap CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Product Id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Image</th>
-        </tr>
-    </thead>
+<div class="container mt-5">
 
-    <tbody>
+    <!-- Header + Add button -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>All Products</h2>
+        <button class="btn btn-primary" onclick="location.href='@Url.Action("AddProducts", "Home")'">
+            ➕ Add New Product
+        </button>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="row">
         @foreach (var product in Model)
         {
-            <tr>
-                <td>@product.Id</td>
-                <td>@product.ProductName</td>
-                <td>@product.Description</td>
-                <td>@product.Price</td>
-                <td>@product.StockQuantity</td>
-                <td><img src="data:image/[image-type];base64, @product.ProductImage" height="80" width="80" /></td>
-                <td>
-                    <button type="button" onclick="confirmUpdate(@product.Id)"></button>
-                </td>
-            </tr>
+            <div class="col-md-3 mb-4">
+                <div class="card shadow h-100" style="border-radius:10px;">
+
+                    <!-- Product Image -->
+                    <img src="data:image/png;base64,@product.ProductImage"
+                         class="card-img-top"
+                         style="height:180px; object-fit:cover;" />
+
+                    <div class="card-body">
+                        <h5 class="card-title">@product.ProductName</h5>
+                        <p class="card-text text-truncate">@product.Description</p>
+                        <p class="fw-bold text-success">₹ @product.Price</p>
+                        <p>Stock: @product.StockQuantity</p>
+                    </div>
+
+                    <div class="card-footer d-flex justify-content-between">
+                        <!-- Update button -->
+                        <button class="btn btn-warning btn-sm w-45" onclick="confirmUpdate(@product.Id)">
+                            ✏ Update
+                        </button>
+
+                        <!-- Delete button -->
+                        <form asp-action="DeleteProducts"
+                              asp-controller="Product"
+                              asp-route-id="@product.Id"
+                              method="post" style="display:inline;"
+                              onsubmit="return confirm('Are you sure You Want To Delete This Item?');">
+                            <button type="submit" class="btn btn-danger btn-sm w-45">
+                                🗑 Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+
+</div>
 
 <script>
     function confirmUpdate(id) {
-            location.href = '/editproduct/' + id;
+        location.href = '/editproduct/' + id;
     }
 </script>
 
-<button type="button"
-        class="btn btn-primary"
-        onclick="location.href='@Url.Action("AddProducts", "Home")'">
-    Add New Product
-</button>

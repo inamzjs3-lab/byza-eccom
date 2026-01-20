@@ -1,56 +1,63 @@
 ﻿@using ServiceLayer.ServiceModels
 @model ProductRequestModel
-<h2>Add Product</h2>
 
-<form  asp-action="AddProduct"asp-controller="Product" method="post">
-  
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <div class="mb-3">
-        <label>Product Name</label>
-        <input asp-for="ProductName" />
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <!-- Card wrapper -->
+            <div class="card shadow p-4" style="border-radius:10px; background:#fff;">
+
+                <h3 class="text-center mb-4">Add Product</h3>
+
+                <form asp-action="AddProduct" asp-controller="Product" method="post">
+
+                    <div class="mb-3">
+                        <label class="form-label">Product Name</label>
+                        <input asp-for="ProductName" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <input asp-for="Description" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Price</label>
+                        <input asp-for="Price" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Stock Quantity</label>
+                        <input asp-for="StockQuantity" type="number" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Image</label>
+                        <input type="file" id="imageInput" accept="image/*" class="form-control" required />
+                        <input type="hidden" name="ProductImage" id="base64Image" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Add Product</button>
+
+                </form>
+
+            </div>
+
+        </div>
     </div>
-    <br />
+</div>
 
-    <div class="mb-3">
-        <label>Description</label>
-        <input asp-for="Description" />
-    </div>
-    <br />
-
-    <div class="mb-3">
-        <label>Price</label>
-        <input type="text" name="Price"/>
-    </div>
-    <br />
-
-    <div class="mb-3">
-        <label>Stock Quantity</label>
-        <input asp-for="StockQuantity" type="number" />
-    </div>
-    <br />
-    <div class="mb-3">
-        <label>Image</label>
-        <input type="file" id="imageInput" accept="image/*" required />
-        <!-- hidden field jisme base64 jayega -->
-        <input type="hidden" name="ProductImage" id="base64Image" />
-
-        @* <input type="file" name="ProductImage" accept="image/*" /> *@
-    </div>
-    <br />
-
-    <button type="submit" class="btn-outline-primary">Add Product</button>
-    <script>
-        document.getElementById("imageInput").addEventListener("change", function () {
-
-            var file = this.files[0];
-            var reader = new FileReader();
-
-            reader.onload = function () {
-                // yeh pura base64 hota hai: data:image/png;base64,xxxx
-                document.getElementById("base64Image").value = reader.result;
-            };
-
-            reader.readAsDataURL(file);
-        });
-    </script>
-    </form>
+<script>
+    document.getElementById("imageInput").addEventListener("change", function () {
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.onload = function () {
+            document.getElementById("base64Image").value = reader.result;
+        };
+        reader.readAsDataURL(file);
+    });
+</script>
