@@ -29,10 +29,10 @@ namespace Byza.Controllers
                 }
             }
             await productService.AddProductAsync(model);
-            return RedirectToAction("GetAllProducts");
+            return RedirectToAction("SellerDashboard");
         }
-        [HttpGet("getproducts")]
-        public async Task<IActionResult> GetAllProducts()
+        [HttpGet("sellerdashboard")]
+        public async Task<IActionResult> SellerDashboard()
         {
             var products = await productService.GetProductsAsync();
             return View(products);
@@ -58,7 +58,7 @@ namespace Byza.Controllers
             var result = await productService.UpdateProductAsync(id,model);
             if (result)
             {
-                return RedirectToAction("GetAllProducts");
+                return RedirectToAction("SellerDashboard");
             }
             return View("EditProduct",model);
         }
@@ -66,7 +66,7 @@ namespace Byza.Controllers
         public async Task<IActionResult> DeleteProducts(int id)
         {
             await productService.DeleteAsync(id);
-            return RedirectToAction("GetAllProducts");
+            return RedirectToAction("SellerDashboard");
         }
     }
 }
